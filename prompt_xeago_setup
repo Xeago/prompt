@@ -6,7 +6,7 @@ prompt_xeago_setup () {
   if [[ -n $SSH_CONNECTION || $UID -eq 0 ]]; then
       PROMPT+='%F{white}%n%F{magenta}@%F{yellow}%m%f:'
   fi
-  PROMPT+='%F{cyan}${${(%):-%~}//\//%B%F{204\}/%b%F{cyan\}}%f'
+  PROMPT+='%F{cyan}${${(%):-%c}//\//%B%F{204\}/%b%F{cyan\}}%f'
   PROMPT+='%(!.%{%F{magenta}%}#.%{%F{red}%}$)%f%s '
   
   prompt_opts=(cr subst percent)
@@ -28,7 +28,12 @@ prompt_xeago_setup () {
   function zsh_git_prompt_chpwd {
     PR_GIT_UPDATE=1
   }
-  chpwd_functions+=('zsh_git_prompt_chpwd')
+
+  function print_cwd_chpwd {
+    print -P %F{cyan}${${(%):-%~}//\//%B%F{204}/%b%F{cyan}}%f
+  }
+  alias pwd=print_cwd_chpwd
+  chpwd_functions+=('zsh_git_prompt_chpwd' 'print_cwd_chpwd')
   
   function zsh_git_prompt_preexec {
     case "$(history $HISTCMD)" in 
