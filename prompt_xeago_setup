@@ -1,4 +1,6 @@
 prompt_xeago_setup () {
+  export VIRTUAL_ENV_DISABLE_PROMPT=1 # disallow virtualenv from updating prompt
+
   PROMPT=''
   if [[ -n $SSH_CONNECTION || $UID -eq 0 ]]; then
       PROMPT+='%F{white}%n%F{magenta}@%F{yellow}%m%f:'
@@ -36,7 +38,7 @@ prompt_xeago_setup () {
   }
   preexec_functions+=('zsh_git_prompt_preexec')
   
-  RPROMPT='${vcs_info_msg_0_}'
+  RPROMPT='${vcs_info_msg_0_} ${VIRTUAL_ENV:t}'
 }
 
 prompt_xeago_setup "$@"
