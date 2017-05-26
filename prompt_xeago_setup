@@ -6,7 +6,7 @@ prompt_xeago_setup () {
   if [[ -n $SSH_CONNECTION || $UID -eq 0 ]]; then
       PROMPT+='%F{white}%n%F{magenta}@%F{yellow}%m%f:'
   fi
-  PROMPT+='%F{cyan}${${(%):-%~}//\//%F{blue\}/%F{cyan\}}%f'
+  PROMPT+='%F{cyan}${${(%):-%~}//\//%B%F{204\}/%b%F{cyan\}}%f'
   PROMPT+='%(!.%{%F{magenta}%}#.%{%F{red}%}$)%f%s '
   
   prompt_opts=(cr subst percent)
