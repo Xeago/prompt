@@ -40,6 +40,9 @@ prompt_xeago_setup () {
       *git*)
         PR_GIT_UPDATE=1
         ;;
+      *gh*)
+        PR_GIT_UPDATE=1
+        ;;
     esac
   }
   preexec_functions+=('zsh_git_prompt_preexec')
